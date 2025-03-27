@@ -1,11 +1,15 @@
+import { useState } from 'react';
 import './App.css';
-import Counter from './Counter'
+import Counter from './Counter';
 
 function App() {
+  const [counts, setCounts] = useState([1, 4, 3]);
+
   return (
-    <div className='App'>
-      <Counter label="Apples" value={1} />
-      <Counter label="Oranges" value={3} />
+    <div className="App">
+      {counts.map((value, index) => (
+        <Counter key={index} label={`Counter ${index + 1}`} value={value} />
+      ))}
     </div>
   );
 }
