@@ -11,8 +11,11 @@ function App() {
     setCounts(newCounts);
   };
 
+  const totalCount = counts.reduce((sum, value) => sum + value, 0);
+
   return (
     <div className="App">
+      <h2>Total Count: {totalCount}</h2>
       {counts.map((value, index) => (
         <Counter
           key={index}
