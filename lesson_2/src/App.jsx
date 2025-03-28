@@ -7,15 +7,22 @@ function App() {
 
   const updateCount = (index, delta) => {
     const newCounts = [...counts]; 
-    newCounts[index] += delta;
-    setCounts(newCounts);
+    const newValue = newCounts[index] + delta;
+    
+    // Prevent values from going below 0 or above 10
+    if (newValue >= 0 && newValue <= 10) {
+      newCounts[index] = newValue;
+      setCounts(newCounts);
+    }
   };
 
-  const totalCount = counts.reduce((sum, value) => sum + value, 0);
+  const resetCounts = () => {
+    setCounts([0, 0, 0]); // Reset all counters to 0
+  };
 
   return (
     <div className="App">
-      <h2>Total Count: {totalCount}</h2>
+      <h2>Total Count: {counts.reduce((sum, value) => sum + value, 0)}</h2>
       {counts.map((value, index) => (
         <Counter
           key={index}
@@ -25,6 +32,7 @@ function App() {
           decrement={() => updateCount(index, -1)}
         />
       ))}
+      <button onClick={resetCounts}>Reset All</button>
     </div>
   );
 }
